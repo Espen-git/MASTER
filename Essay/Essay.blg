@@ -1,0 +1,15 @@
+[0] Config.pm:311> INFO - This is Biber 2.16
+[0] Config.pm:314> INFO - Logfile is 'Essay.blg'
+[136] biber-MSWIN64:340> INFO - === 
+[176] Biber.pm:415> INFO - Reading 'Essay.bcf'
+[313] Biber.pm:952> INFO - Found 8 citekeys in bib section 0
+[330] Biber.pm:4340> INFO - Processing section 0
+[347] Biber.pm:4531> INFO - Looking for bibtex format file 'refs.bib' for section 0
+[394] bibtex.pm:1689> INFO - LaTeX decoding ...
+[411] bibtex.pm:1494> INFO - Found BibTeX data source 'refs.bib'
+[509] UCollate.pm:68> INFO - Overriding locale 'en-UK' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[510] UCollate.pm:68> INFO - Overriding locale 'en-UK' defaults 'variable = shifted' with 'variable = non-ignorable'
+[510] Biber.pm:4168> INFO - Sorting list 'nty/global//global/global' of type 'entry' with template 'nty' and locale 'en-UK'
+[510] Biber.pm:4174> INFO - No sort tailoring available for locale 'en-UK'
+[524] bbl.pm:654> INFO - Writing 'Essay.bbl' with encoding 'UTF-8'
+[529] bbl.pm:757> INFO - Output to Essay.bbl

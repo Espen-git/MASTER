@@ -1,0 +1,347 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.1 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{Krim-Viberg}{article}{}
+      \name{author}{2}{}{%
+        {{hash=ac95677a7d15b4af8bdea9a66f957329}{%
+           family={H.},
+           familyi={H\bibinitperiod},
+           given={Krim},
+           giveni={K\bibinitperiod}}}%
+        {{hash=102771fa1922a97848f7f7be1cc0ec40}{%
+           family={M.},
+           familyi={M\bibinitperiod},
+           given={Viberg},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{8ec36c4985fe400e02d88aac798723e4}
+      \strng{fullhash}{8ec36c4985fe400e02d88aac798723e4}
+      \strng{bibnamehash}{8ec36c4985fe400e02d88aac798723e4}
+      \strng{authorbibnamehash}{8ec36c4985fe400e02d88aac798723e4}
+      \strng{authornamehash}{8ec36c4985fe400e02d88aac798723e4}
+      \strng{authorfullhash}{8ec36c4985fe400e02d88aac798723e4}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Signal Processing Magazine}
+      \field{number}{4}
+      \field{title}{Two decades of array signal processing research: the parametric approach}
+      \field{volume}{13}
+      \field{year}{1996}
+      \field{pages}{67\bibrangedash 94}
+      \range{pages}{28}
+      \verb{doi}
+      \verb 10.1109/79.526899
+      \endverb
+    \endentry
+    \entry{Kjenstad}{article}{}
+      \name{author}{1}{}{%
+        {{hash=4651a17e5b9de50e046f8e70df43757f}{%
+           family={Kjenstad},
+           familyi={K\bibinitperiod},
+           given={Lars\bibnamedelima Egil},
+           giveni={L\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{4651a17e5b9de50e046f8e70df43757f}
+      \strng{fullhash}{4651a17e5b9de50e046f8e70df43757f}
+      \strng{bibnamehash}{4651a17e5b9de50e046f8e70df43757f}
+      \strng{authorbibnamehash}{4651a17e5b9de50e046f8e70df43757f}
+      \strng{authornamehash}{4651a17e5b9de50e046f8e70df43757f}
+      \strng{authorfullhash}{4651a17e5b9de50e046f8e70df43757f}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Ultrasound Beamforming based on Deep Learning}
+      \field{year}{2020}
+      \verb{urlraw}
+      \verb https://ntnuopen.ntnu.no/ntnu-xmlui/handle/11250/2657612
+      \endverb
+      \verb{url}
+      \verb https://ntnuopen.ntnu.no/ntnu-xmlui/handle/11250/2657612
+      \endverb
+    \endentry
+    \entry{DNN-beamforming}{article}{}
+      \name{author}{2}{}{%
+        {{hash=194fa15e1809fb04a967693b9bcafba2}{%
+           family={Luchies},
+           familyi={L\bibinitperiod},
+           given={Adam\bibnamedelima C.},
+           giveni={A\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=5bee4debea73c71db87ca139e2c13675}{%
+           family={Byram},
+           familyi={B\bibinitperiod},
+           given={Brett\bibnamedelima C.},
+           giveni={B\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{cb4cb52b5b2be7e6896fe7113a520762}
+      \strng{fullhash}{cb4cb52b5b2be7e6896fe7113a520762}
+      \strng{bibnamehash}{cb4cb52b5b2be7e6896fe7113a520762}
+      \strng{authorbibnamehash}{cb4cb52b5b2be7e6896fe7113a520762}
+      \strng{authornamehash}{cb4cb52b5b2be7e6896fe7113a520762}
+      \strng{authorfullhash}{cb4cb52b5b2be7e6896fe7113a520762}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Medical Imaging}
+      \field{number}{9}
+      \field{title}{Deep Neural Networks for Ultrasound Beamforming}
+      \field{volume}{37}
+      \field{year}{2018}
+      \field{pages}{2010\bibrangedash 2021}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/TMI.2018.2809641
+      \endverb
+    \endentry
+    \entry{Adaptive-Deep-Learning}{article}{}
+      \name{author}{7}{}{%
+        {{hash=78dbc6be97195ee009152a0164c6e879}{%
+           family={Luijten},
+           familyi={L\bibinitperiod},
+           given={Ben},
+           giveni={B\bibinitperiod}}}%
+        {{hash=876506f26ee64115472cfaaa6cc85462}{%
+           family={Cohen},
+           familyi={C\bibinitperiod},
+           given={Regev},
+           giveni={R\bibinitperiod}}}%
+        {{hash=9c20876f93ef10c7209620d5acfe55a0}{%
+           family={Bruijn},
+           familyi={B\bibinitperiod},
+           given={Frederik\bibnamedelima J.},
+           giveni={F\bibinitperiod\bibinitdelim J\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+        {{hash=bdc697a023b927eb82f6854a11ed19e0}{%
+           family={Schmeitz},
+           familyi={S\bibinitperiod},
+           given={Harold\bibnamedelimb A.\bibnamedelimi W.},
+           giveni={H\bibinitperiod\bibinitdelim A\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+        {{hash=67129bbe00be80fe3991864dd8250d97}{%
+           family={Mischi},
+           familyi={M\bibinitperiod},
+           given={Massimo},
+           giveni={M\bibinitperiod}}}%
+        {{hash=d147b0cce00b122576f734fc8dc462a7}{%
+           family={Eldar},
+           familyi={E\bibinitperiod},
+           given={Yonina\bibnamedelima C.},
+           giveni={Y\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=11bf1485b89c682674bbfa063418b5d7}{%
+           family={Sloun},
+           familyi={S\bibinitperiod},
+           given={Ruud\bibnamedelimb J.\bibnamedelimi G.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim G\bibinitperiod},
+           prefix={van},
+           prefixi={v\bibinitperiod}}}%
+      }
+      \strng{namehash}{99ee851b536c9fdef6fab96ba320a399}
+      \strng{fullhash}{0b069a4fdca657ea123b5deffd3f8053}
+      \strng{bibnamehash}{99ee851b536c9fdef6fab96ba320a399}
+      \strng{authorbibnamehash}{99ee851b536c9fdef6fab96ba320a399}
+      \strng{authornamehash}{99ee851b536c9fdef6fab96ba320a399}
+      \strng{authorfullhash}{0b069a4fdca657ea123b5deffd3f8053}
+      \field{extraname}{1}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{IEEE Transactions on Medical Imaging}
+      \field{number}{12}
+      \field{title}{Adaptive Ultrasound Beamforming Using Deep Learning}
+      \field{volume}{39}
+      \field{year}{2020}
+      \field{pages}{3967\bibrangedash 3978}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1109/TMI.2020.3008537
+      \endverb
+    \endentry
+    \entry{Models-to-Deep}{article}{}
+      \name{author}{5}{}{%
+        {{hash=78dbc6be97195ee009152a0164c6e879}{%
+           family={Luijten},
+           familyi={L\bibinitperiod},
+           given={Ben},
+           giveni={B\bibinitperiod}}}%
+        {{hash=93caa01652226c84f3d9f303b54a27f9}{%
+           family={Chennakeshava},
+           familyi={C\bibinitperiod},
+           given={Nishith},
+           giveni={N\bibinitperiod}}}%
+        {{hash=d147b0cce00b122576f734fc8dc462a7}{%
+           family={Eldar},
+           familyi={E\bibinitperiod},
+           given={Yonina\bibnamedelima C.},
+           giveni={Y\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=67129bbe00be80fe3991864dd8250d97}{%
+           family={Mischi},
+           familyi={M\bibinitperiod},
+           given={Massimo},
+           giveni={M\bibinitperiod}}}%
+        {{hash=11bf1485b89c682674bbfa063418b5d7}{%
+           family={Sloun},
+           familyi={S\bibinitperiod},
+           given={Ruud\bibnamedelimb J.\bibnamedelimi G.},
+           giveni={R\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim G\bibinitperiod},
+           prefix={van},
+           prefixi={v\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {arXiv}%
+      }
+      \strng{namehash}{99ee851b536c9fdef6fab96ba320a399}
+      \strng{fullhash}{6a32dfadba087e7a6868eea407b07dc3}
+      \strng{bibnamehash}{99ee851b536c9fdef6fab96ba320a399}
+      \strng{authorbibnamehash}{99ee851b536c9fdef6fab96ba320a399}
+      \strng{authornamehash}{99ee851b536c9fdef6fab96ba320a399}
+      \strng{authorfullhash}{6a32dfadba087e7a6868eea407b07dc3}
+      \field{extraname}{2}
+      \field{sortinit}{L}
+      \field{sortinithash}{7c47d417cecb1f4bd38d1825c427a61a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Ultrasound Signal Processing: From Models to Deep Learning}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.48550/ARXIV.2204.04466
+      \endverb
+      \verb{urlraw}
+      \verb https://arxiv.org/abs/2204.04466
+      \endverb
+      \verb{url}
+      \verb https://arxiv.org/abs/2204.04466
+      \endverb
+    \endentry
+    \entry{Rindal}{article}{}
+      \name{author}{1}{}{%
+        {{hash=7176f2d9b78fdfa0d83937dbdcb75701}{%
+           family={Rindal},
+           familyi={R\bibinitperiod},
+           given={Ole\bibnamedelimb Marius\bibnamedelima Hoel},
+           giveni={O\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{7176f2d9b78fdfa0d83937dbdcb75701}
+      \strng{fullhash}{7176f2d9b78fdfa0d83937dbdcb75701}
+      \strng{bibnamehash}{7176f2d9b78fdfa0d83937dbdcb75701}
+      \strng{authorbibnamehash}{7176f2d9b78fdfa0d83937dbdcb75701}
+      \strng{authornamehash}{7176f2d9b78fdfa0d83937dbdcb75701}
+      \strng{authorfullhash}{7176f2d9b78fdfa0d83937dbdcb75701}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Software Beamforming in Medical Ultrasound Imaging - a blessing and a curse}
+      \field{year}{2019}
+      \verb{urlraw}
+      \verb http://urn.nb.no/URN:NBN:no-76872
+      \endverb
+      \verb{url}
+      \verb http://urn.nb.no/URN:NBN:no-76872
+      \endverb
+    \endentry
+    \entry{Simons}{article}{}
+      \name{author}{2}{}{%
+        {{hash=6f6fdf38c259f77fb463a43fbab516e9}{%
+           family={Simons},
+           familyi={S\bibinitperiod},
+           given={Gordon},
+           giveni={G\bibinitperiod}}}%
+        {{hash=ba67075377dcaa37b5e9a2bf31410bcc}{%
+           family={Yao},
+           familyi={Y\bibinitperiod},
+           given={Yi-Ching},
+           giveni={Y\bibinithyphendelim C\bibinitperiod}}}%
+      }
+      \strng{namehash}{767c8f22d9acd2369052c482b422c0d1}
+      \strng{fullhash}{767c8f22d9acd2369052c482b422c0d1}
+      \strng{bibnamehash}{767c8f22d9acd2369052c482b422c0d1}
+      \strng{authorbibnamehash}{767c8f22d9acd2369052c482b422c0d1}
+      \strng{authornamehash}{767c8f22d9acd2369052c482b422c0d1}
+      \strng{authorfullhash}{767c8f22d9acd2369052c482b422c0d1}
+      \field{sortinit}{S}
+      \field{sortinithash}{b164b07b29984b41daf1e85279fbc5ab}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0024-3795}
+      \field{journaltitle}{Linear Algebra and its Applications}
+      \field{number}{1}
+      \field{title}{Approximating the inverse of a symmetric positive definite matrix}
+      \field{volume}{281}
+      \field{year}{1998}
+      \field{pages}{97\bibrangedash 103}
+      \range{pages}{7}
+      \verb{doi}
+      \verb https://doi.org/10.1016/S0024-3795(98)10038-1
+      \endverb
+      \verb{urlraw}
+      \verb https://www.sciencedirect.com/science/article/pii/S0024379598100381
+      \endverb
+      \verb{url}
+      \verb https://www.sciencedirect.com/science/article/pii/S0024379598100381
+      \endverb
+    \endentry
+    \entry{NN-eigen}{article}{}
+      \name{author}{3}{}{%
+        {{hash=f6de641fbecd61c21a492fa6ddbef2aa}{%
+           family={Yi},
+           familyi={Y\bibinitperiod},
+           given={Zhang},
+           giveni={Z\bibinitperiod}}}%
+        {{hash=6b84ad0923c9ca537a340e678bee3c35}{%
+           family={Fu},
+           familyi={F\bibinitperiod},
+           given={Yan},
+           giveni={Y\bibinitperiod}}}%
+        {{hash=96bfb96b683c6daa2987debc1ee3e515}{%
+           family={Tang},
+           familyi={T\bibinitperiod},
+           given={Hua},
+           giveni={H\bibinitperiod}}}%
+      }
+      \strng{namehash}{b9c4f4ca37478a458dc0050d3984fa31}
+      \strng{fullhash}{b9c4f4ca37478a458dc0050d3984fa31}
+      \strng{bibnamehash}{b9c4f4ca37478a458dc0050d3984fa31}
+      \strng{authorbibnamehash}{b9c4f4ca37478a458dc0050d3984fa31}
+      \strng{authornamehash}{b9c4f4ca37478a458dc0050d3984fa31}
+      \strng{authorfullhash}{b9c4f4ca37478a458dc0050d3984fa31}
+      \field{sortinit}{Y}
+      \field{sortinithash}{fd67ad5a9ef0f7456bdd9aab10fe1495}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Computers \& Mathematics with Applications}
+      \field{month}{04}
+      \field{title}{Neural networks based approach for computing eigenvectors and eigenvalues of symmetric matrix}
+      \field{volume}{47}
+      \field{year}{2004}
+      \field{pages}{1155\bibrangedash 1164}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1016/S0898-1221(04)90110-1
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

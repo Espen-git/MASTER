@@ -1,0 +1,34 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\babel@toc {UKenglish}{}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1}Introduction}{1}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2}Cite test}{2}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3}Background}{2}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1}Ultrasound}{2}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2}Who uses it}{2}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.3}Beamforming}{2}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.3.1}DAS}{2}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.4}Adaptive beamforming}{3}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.4.1}Capon's / MV beamformer}{4}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.4.2}Eigenvalue / Eigenvector methods}{4}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.5}Coherence}{4}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.6}ML}{4}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.6.1}Supervised learning}{4}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.6.2}NNs and DNNs}{4}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{\numberline {3.6.3}Variational networks}{5}{}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4}Discussion}{5}{}%
