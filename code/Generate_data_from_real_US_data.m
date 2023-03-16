@@ -9,16 +9,16 @@ addpath(local_path);
 
 % Choose dataset
 %filename='Verasonics_P2-4_parasternal_long_small.uff';
-%filename='Alpinion_L3-8_CPWC_hyperechoic_scatterers.uff';
-filename='Alpinion_L3-8_CPWC_hypoechoic.uff';
+filename='Alpinion_L3-8_CPWC_hyperechoic_scatterers';
+%filename='Alpinion_L3-8_CPWC_hypoechoic.uff';
 %filename='Alpinion_L3-8_FI_hyperechoic_scatterers.uff';
 %filename='Alpinion_L3-8_FI_hypoechoic.uff';
 % check if the file is available in the local path or downloads otherwise
-tools.download(filename, url, local_path);
+tools.download(strcat(filename, '.uff'), url, local_path);
 
 % check if the file is available in the local path or downloads otherwise
-tools.download(filename, url, local_path);
-channel_data = uff.read_object([local_path, filename],'/channel_data')
+tools.download(strcat(filename, '.uff'), url, local_path);
+channel_data = uff.read_object([local_path, strcat(filename, '.uff')],'/channel_data')
 
 % For Alpion
 %uff_file=uff(filename)
@@ -44,7 +44,7 @@ scan.x_axis = linspace(channel_data.probe.x(1),channel_data.probe.x(end),512)';
 scan.z_axis = linspace(5e-3,50e-3,512)';
 
 %%
-% transmit beamforming (for the MV)
+% transmit beamforming (before MV)
 mid = midprocess.das();
 mid.channel_data = channel_data;
 mid.scan = scan;
@@ -54,7 +54,7 @@ mid.receive_apodization.window = uff.window.none;
 b_data_transmit = mid.go();
 
 %% MV
-post = postprocess.capon_minimum_variance();
+post = capon_R_out();
 post.channel_data = channel_data;
 post.input = b_data_transmit;
 post.dimension = dimension.receive();
@@ -66,24 +66,24 @@ post.L_elements = 16; % subarray size
 post.K_in_lambda = 1; % temporal averaging factor
 post.regCoef = 0; % regularization factor
 
-[b_data_mv, R] = post.go();
+post.go(filename);
 
 %%
-save('R_Alpinion_L3-8_CPWC_hypoechoic.mat','R');
+%save('R_Alpinion_L3-8_CPWC_hypoechoic.mat','R');
 
 %% MV
-b_data_mv.plot([],['MV'],[80],[],[],[],[],'dark');      % Display
+%b_data_mv.plot([],['MV'],[80],[],[],[],[],'dark');      % Display
 
 %%
 
-mid=midprocess.das();
-mid.channel_data=channel_data;
-mid.scan=scan;
-mid.dimension=dimension.both()
-mid.transmit_apodization.window=uff.window.none;
-mid.receive_apodization.window=uff.window.none;
-b_data_DAS = mid.go();
+%mid=midprocess.das();
+%mid.channel_data=channel_data;
+%mid.scan=scan;
+%mid.dimension=dimension.both()
+%mid.transmit_apodization.window=uff.window.none;
+%mid.receive_apodization.window=uff.window.none;
+%b_data_DAS = mid.go();
 
 %% DAS
-b_data_DAS.plot([],['DAS'],[80],[],[],[],[],'dark');      % Display
+%b_data_DAS.plot([],['DAS'],[80],[],[],[],[],'dark');      % Display
 
