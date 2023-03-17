@@ -124,6 +124,7 @@ def runstuff():
     config['maxnumepochs'] = 12
     config['scheduler_stepsize'] = 5
     config['scheduler_factor'] = 0.3
+    config['images'] = ["Alpinion_L3-8_CPWC_hyperechoic_scatterers"]
 
     # Data augmentations.
     # Scaling/Nomalization here ??
@@ -140,8 +141,8 @@ def runstuff():
     root_dir = 'C:/Users/espen/Documents/Skole/MASTER/code/'
     # Datasets
     datasets={}
-    datasets['train'] = USDataset(root_dir=root_dir, trvaltest=0, transform=data_transforms['train'])
-    datasets['val'] = USDataset(root_dir=root_dir, trvaltest=1, transform=data_transforms['val'])
+    datasets['train'] = USDataset(root_dir=root_dir, images=config['images'], trvaltest=0, transform=data_transforms['train'])
+    datasets['val'] = USDataset(root_dir=root_dir, images=config['images'], trvaltest=1, transform=data_transforms['val'])
 
     # Dataloaders
     dataloaders = {}

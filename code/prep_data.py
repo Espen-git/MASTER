@@ -15,9 +15,9 @@ R3 = Verasonics_parasternal_long_small_data['R']
 # scale data
 
 data_dir = "C:/Users/espen/Documents/Skole/MASTER/code/data/"
-data_string1 = "Alpinion_hyperechoic_scatterers_data"
-data_string2 = "Alpinion_hypoechoic_data"
-data_string3 = "Verasonics_parasternal_long_small_data"
+name_string1 = "Alpinion_hyperechoic_scatterers_data/"
+name_string2 = "Alpinion_hypoechoic_data/"
+name_string3 = "Verasonics_parasternal_long_small_data/"
 
 length_R1 = R1.shape[2]
 length_R2 = R2.shape[2]
