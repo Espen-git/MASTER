@@ -1,4 +1,4 @@
-classdef capon_R_in < postprocess
+classdef modified_capon_minimum_variance < postprocess
     %   CAPON_MINIMUM_VARIANCE
     %
     %             Beamform a ultrasound image using the Capon beamformer
@@ -7,12 +7,13 @@ classdef capon_R_in < postprocess
     %             intuition, not speed. Documentation to be written ;)
     %
     %   implementers: Ole Marius Hoel Rindal <olemarius@olemarius.net>
+    %   Modified by: Espen Lønes <espen.lones@gmail.com>  
     %
-    %   $Last updated: 2017/05/02$
+    %   $Last updated: 2023/04/04$
     
     %% constructor
     methods (Access = public)
-        function h=capon_R_in()
+        function h=modified_capon_minimum_variance()
             h.name='Minimum Variance MATLAB';
             h.reference= 'Benefits';
             h.implemented_by={'Ole Marius Hoel Rindal <olemarius@olemarius.net>'};
@@ -37,7 +38,7 @@ classdef capon_R_in < postprocess
     end
     
     methods
-        function [output] = go(h, name, Ria_type)       
+        function [output]=go(h, name, call_type, Ria_type) % call_type: 0=normal, 1=save R, 2=load R_inv       
             % check if we can skip calculation
             if h.check_hash()
                 output = h.output; 
@@ -105,7 +106,7 @@ classdef capon_R_in < postprocess
                         % Apodization matrix indicating active elements
                         %apod_matrix = reshape(bsxfun(@times,tx_apodization,rx_apodization(n_channel)),h.input(1).scan.N_z_axis,h.input(1).scan.N_x_axis,h.input.N_waves);
                         data_cube = reshape(h.input.data(:,:,:,n_frame),h.input(1).scan.N_z_axis,h.input(1).scan.N_x_axis,h.input.N_channels*h.input.N_waves);
-                        [image] = capon_minimum_variance_implementation(h,data_cube,apod_matrix,['1/1'], name, Ria_type);
+                        image = capon_minimum_variance_implementation(h,data_cube,apod_matrix,['1/1'], n_frame, name, call_type, Ria_type);
                         aux_data(:,1,1,n_frame) = image(:); 
                     end
                     h.output.data = aux_data;
@@ -117,7 +118,7 @@ classdef capon_R_in < postprocess
                             % Apodization matrix indicating active elements
                             apod_matrix = reshape(bsxfun(@times,tx_apodization,rx_apodization(n_channel)),h.input(1).scan.N_z_axis,h.input(1).scan.N_x_axis,h.input.N_waves);
                             data_cube = reshape(h.input.data(:,n_channel,:,n_frame),h.input(1).scan.N_z_axis,h.input(1).scan.N_x_axis,h.input.N_waves);
-                            [image] = capon_minimum_variance_implementation(h,data_cube,apod_matrix,[num2str(n_channel),'/',num2str(h.input.N_channels)], name, Ria_type);
+                            image = capon_minimum_variance_implementation(h,data_cube,apod_matrix,[num2str(n_channel),'/',num2str(h.input.N_channels)], n_frame, name, call_type, Ria_type);
                             aux_data(:,n_channel,:,n_frame) = image(:);
                         end
                     end
@@ -143,7 +144,7 @@ classdef capon_R_in < postprocess
                             if ~isempty(h.channel_data.N_active_elements) && sum(h.channel_data.N_active_elements ~= h.channel_data.N_elements)
                                 apod_matrix(abs(data_cube)<eps) = 0;
                             end
-                            [image] = capon_minimum_variance_implementation(h,data_cube,apod_matrix,[num2str(n_wave),'/',num2str(h.input.N_waves)], name, Ria_type);
+                            image = capon_minimum_variance_implementation(h,data_cube,apod_matrix,[num2str(n_wave),'/',num2str(h.input.N_waves)], n_frame, name, call_type, Ria_type);
                             aux_data(:,1,n_wave,n_frame) = image(:);
                         end
                     end
@@ -159,26 +160,73 @@ classdef capon_R_in < postprocess
             h.save_hash();
         end
         
-        function [z] = capon_minimum_variance_implementation(h,data_cube,apod_matrix,progress, name, Ria_type)
+        function z = capon_minimum_variance_implementation(h,data_cube,apod_matrix,progress, n_frame, name, call_type, Ria_type)
             [N,E,M] = size(data_cube);
             z = zeros(N,E); %Beamformed output
+            image_dir = strcat('C:\Users\espen\Documents\Skole\MASTER\code\data\', name);
+            
             %%
             %This can be changed to parfor
             tools.workbar();
             for e = 1:E
                 tools.workbar(e/E,sprintf('%s %s (%s)',h.name,h.version,progress),'Minimum Variance');
+                
+                rf_data = squeeze(data_cube(:,e,:));
                 %For every sample
-                for k = 1:N     
-                        %Steering vector
-                        %a = ones(L_new,1); 
+                for k = 1:N
+                    if (sum(abs(rf_data(k,:))>eps) == 0)
+                        z(k,e) = 0;
+                    else
+                        idx = find(abs(squeeze(apod_matrix(k,e,:)))>h.active_element_criterium);
+                        M_new = length(idx);        %Number of elements with actual data
+                        L_frac = h.L_elements/M;    %Fraction of full aperture to be used for subaperture
+                        L_new = floor(L_frac*M_new);
+                        I_new = eye(L_new);
                         
-                        %Load inverted matrix
-                        if Ria_type == 'True_Ria'
-                            path_prefix = strcat('C:\Users\espen\Documents\Skole\MASTER\code\data\', name, '\Ria\', name);
-                            Ria = cell2mat(struct2cell(load(strcat(path_prefix, '_', num2str(e), '_', num2str(k), '.mat'))))
-                            Ria = load()
+                        % If load Ria(R_inv)
+                        if call_type == 2
+                            file_path = strcat(image_dir,'\',Ria_type,'\');
+                            Ria = cell2mat(struct2cell(load(strcat(file_path,n_frame,'_',num2str(e),'_',num2str(k),'.mat'))));
+                        else % Calculate Ria
+                            %Estimate spatial covariance matrix
+                            R_sub = zeros(L_new,L_new);
+                            %Some ugly indexing to handle top and bottom
+                            %regarding K
+                            for l = idx(1):idx(end)-L_new+1
+                                if k-h.K_samples < 1
+                                    R_sub=...
+                                        R_sub+rf_data(1:k+h.K_samples,l:l+L_new-1)'...
+                                        *rf_data(1:k+h.K_samples,l:l+L_new-1);
+                                elseif k+h.K_samples > N
+                                    R_sub=...
+                                        R_sub+rf_data(k-h.K_samples:end,l:l+L_new-1)'...
+                                        *rf_data(k-h.K_samples:end,l:l+L_new-1);
+                                else
+                                    R_sub...
+                                        =R_sub+rf_data(k-h.K_samples:k+h.K_samples,l:l+L_new-1)'...
+                                        *rf_data(k-h.K_samples:k+h.K_samples,l:l+L_new-1);
+                                end
+                            end
+                            %Average the subarrays
+                            R_sub = R_sub/((2*h.K_samples+1)*(M_new-L_new+1));
+
+                            %Forward backward averaging
+                            if(h.doForwardBackward)
+                                R_sub = 0.5*(R_sub+rot90(conj(R_sub),2));
+                            end
+
+                            %Steering vector
+                            a = ones(L_new,1); 
+
+                            % R
+                            R = (R_sub + I_new*(h.regCoef/L_new)*trace(R_sub));
+                            %Invert matrix with added diagonal loading
+                            Ria = (R_sub + I_new*(h.regCoef/L_new)*trace(R_sub))\a;
+                            
+                            if call_type == 1 % save
+                                
+                            end
                         end
-                        
                         
                         %Create mv weights
                         w_mv = (Ria)/(a'*Ria);
@@ -224,4 +272,6 @@ classdef capon_R_in < postprocess
         
     end
 end
+
+
 

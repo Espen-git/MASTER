@@ -1,5 +1,4 @@
-% Make R matrices form US data
-function generate_data_from_US_data(name, scan_type)
+function b_data_MV = use_modified_capon_minimum_variance(name, scan_type, call_type, Ria_type)
     % data location
     url='http://ustb.no/datasets/';      % if not found downloaded from here
     data_path = 'C:\Users\espen\Documents\Skole\MASTER\code\data\';
@@ -7,8 +6,8 @@ function generate_data_from_US_data(name, scan_type)
     addpath(local_path);
     
     % check if the file is available in the local path or downloads otherwise
-    tools.download(strcat(filename, '.uff'), url, local_path);
-    channel_data = uff.read_object([local_path, strcat(filename, '.uff')],'/channel_data');
+    tools.download(strcat(name, '.uff'), url, local_path);
+    channel_data = uff.read_object([local_path, strcat(name, '.uff')],'/channel_data');
     
     % Define the scan
     if scan_type == 'Alpinion'
@@ -40,7 +39,7 @@ function generate_data_from_US_data(name, scan_type)
     b_data_transmit = mid.go();
     
     % MV
-    post = capon_R_out();
+    post = modified_capon_minimum_variance();
     post.channel_data = channel_data;
     post.input = b_data_transmit;
     post.dimension = dimension.receive();
@@ -52,19 +51,5 @@ function generate_data_from_US_data(name, scan_type)
     post.K_in_lambda = 1; % temporal averaging factor
     post.regCoef = 0; % regularization factor
 
-    post.go(name);
+    b_data_MV = post.go(name, call_type, Ria_type);
 end
-
-%%
-clear all; close all;
-
-% Choose dataset
-%filename='Verasonics_P2-4_parasternal_long_small';
-filename='Alpinion_L3-8_CPWC_hyperechoic_scatterers';
-%filename='Alpinion_L3-8_CPWC_hypoechoic';
-%filename='Alpinion_L3-8_FI_hyperechoic_scatterers';
-%filename='Alpinion_L3-8_FI_hypoechoic';
-
-generate_data_from_US_data
-
-

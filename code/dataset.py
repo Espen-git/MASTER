@@ -5,6 +5,7 @@ from sklearn.model_selection import train_test_split
 import numpy as np
 import os
 import scipy.io as sio
+from shutil import rmtree
 
 torch.manual_seed(0)
 
@@ -13,10 +14,17 @@ class USDataset(Dataset):
 
         self.root_dir = root_dir
         self.data_dir = root_dir + "data/"
-        self.tmp_dir_R = self.data_dir + "tmp/R/"
-        self.tmp_dir_Ria = self.data_dir + "tmp/Ria/"
+        self.tmp_dir_R = self.data_dir + "tmp/R"
+        self.tmp_dir_Ria = self.data_dir + "tmp/Ria"
         self.transform = transform
         self.data_filenames=[]
+
+        # Clear old tmp files
+        rmtree(self.tmp_dir_R)
+        os.mkdir(self.tmp_dir_R)
+        rmtree(self.tmp_dir_Ria)
+        os.mkdir(self.tmp_dir_Ria)
+        print("tmp directories cleared")
 
         # Makes list of all R/Rinv files to be used, and saves copy of R and Rinv to tmp directory
         for image in images:
@@ -24,16 +32,21 @@ class USDataset(Dataset):
             Ria_dir = self.data_dir + image + "/Ria/"
             for filename in os.listdir(R_dir):
                 self.data_filenames.append(filename)
+                print(filename)
 
                 R_filename = R_dir + filename
                 Ria_filename = Ria_dir + filename
                 R = sio.loadmat(R_filename)['R']
                 Ria = sio.loadmat(Ria_filename)['Ria']
-                np.save(self.tmp_dir_R + "filename", R)
-                np.save(self.tmp_dir_Ria + "filename", Ria)
+                np.save(self.tmp_dir_R + "/" + filename, R)
+                np.save(self.tmp_dir_Ria + "/" + filename, Ria)
+        
+        print("All tmp files saved")
                 
         # Train/Test split
         self.data_filenames_train, self.data_filenames_test = train_test_split(self.data_filenames, test_size=0.25, random_state=0)
+
+        print("Test/Train split complete")
 
         if trvaltest==0: # use train set
             self.data_filenames = self.data_filenames_train
