@@ -14,54 +14,43 @@ class USDataset(Dataset):
 
         self.root_dir = root_dir
         self.data_dir = root_dir + "data/"
-        self.tmp_dir_R = self.data_dir + "tmp/R"
-        self.tmp_dir_Ria = self.data_dir + "tmp/Ria"
-        self.transform = transform
-        self.data_filenames=[]
 
-        # Clear old tmp files
-        rmtree(self.tmp_dir_R)
-        os.mkdir(self.tmp_dir_R)
-        rmtree(self.tmp_dir_Ria)
-        os.mkdir(self.tmp_dir_Ria)
-        print("tmp directories cleared")
+        self.transform = transform
+        self.data_filepaths=[]
 
         # Makes list of all R/Rinv files to be used, and saves copy of R and Rinv to tmp directory
         for image in images:
             R_dir = self.data_dir + image + "/R/"
             Ria_dir = self.data_dir + image + "/Ria/"
             for filename in os.listdir(R_dir):
-                self.data_filenames.append(filename)
-                print(filename)
+                filepath = R_dir + filename
+                self.data_filepaths.append(filepath)
 
-                R_filename = R_dir + filename
-                Ria_filename = Ria_dir + filename
-                R = sio.loadmat(R_filename)['R']
-                Ria = sio.loadmat(Ria_filename)['Ria']
-                np.save(self.tmp_dir_R + "/" + filename, R)
-                np.save(self.tmp_dir_Ria + "/" + filename, Ria)
-        
-        print("All tmp files saved")
-                
         # Train/Test split
-        self.data_filenames_train, self.data_filenames_test = train_test_split(self.data_filenames, test_size=0.25, random_state=0)
+        self.data_filepaths_train, self.data_filepaths_test = train_test_split(self.data_filepaths, test_size=0.25, random_state=0)
 
         print("Test/Train split complete")
 
         if trvaltest==0: # use train set
-            self.data_filenames = self.data_filenames_train
+            self.data_filepaths = self.data_filepaths_train
         if trvaltest==1: # use val set
-            self.data_filenames = self.data_filenames_test
+            self.data_filepaths = self.data_filepaths_test
 
     def __len__(self):
         # Number of samples
-        return len(self.data_filenames)
+        return len(self.data_filepaths)
 
     def __getitem__(self, idx):
         # Add flatten
-        filename = self.data_filenames[idx]
-        R = np.load(self.tmp_dir_R + filename, mmap_mode='r')
-        Ria = np.load(self.tmp_dir_Ria + filename, mmap_mode='r')
+        R_path = self.data_filepaths[idx]
+        seperator = "/"
+        split_path = R_path.split(seperator)
+        split_path[-2] = "Ria"
+        filename = split_path[-1]
+        Ria_path = seperator.join(split_path)
+
+        R = np.load(R_path, mmap_mode='r')
+        Ria = np.load(Ria_path, mmap_mode='r')
 
         if self.transform:
             R = self.transform(R)
