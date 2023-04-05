@@ -6,17 +6,24 @@ import numpy as np
 import os
 import scipy.io as sio
 from shutil import rmtree
+import scipy.io as sio
 
 torch.manual_seed(0)
 
 class USDataset(Dataset):
-    def __init__(self, root_dir, images, trvaltest, transform):
+    #def __init__(self, root_dir, images, trvaltest, transform, is_complex):
+    def __init__(self, root_dir, config, trvaltest, transform):
+        
 
         self.root_dir = root_dir
         self.data_dir = root_dir + "data/"
 
         self.transform = transform
         self.data_filepaths=[]
+        self.is_complex = config['is_complex']
+        self.use_normalized_R = config['use_normalized_R']
+        images = config['images']
+        self.use_upper_triangular = config['use_upper_triangular']
 
         # Makes list of all R/Rinv files to be used, and saves copy of R and Rinv to tmp directory
         for image in images:
@@ -49,16 +56,35 @@ class USDataset(Dataset):
         filename = split_path[-1]
         Ria_path = seperator.join(split_path)
 
-        R = np.load(R_path, mmap_mode='r')
-        Ria = np.load(Ria_path, mmap_mode='r')
+        R = sio.loadmat(R_path)['R']
+        Ria = sio.loadmat(Ria_path)['Ria']
 
         if self.transform:
             R = self.transform(R)
             Ria = self.transform(Ria)
 
+        if self.use_normalized_R:
+            R_scale = R.abs().max()  # may be changed? max is noisy
+            R = R / R_scale
+        else:
+            R_scale = 1
+
+        if self.use_upper_triangular:
+            upper_triangular_idx = torch.triu_indices(R.shape[1],R.shape[2] )
+            R = R[0][upper_triangular_idx[0], upper_triangular_idx[1]]
+                
+        if not self.is_complex:
+            Ria = torch.view_as_real(Ria).flatten()
+            R   = torch.view_as_real(R).flatten()
+
         # trekant?
         sample = {'R': R,
                   'R_inv': Ria,
-                  'filename': filename}
+                  'file_path':  R_path, 
+                  'R_scale': R_scale}
         
         return sample
+    
+
+
+    
