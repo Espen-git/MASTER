@@ -1,7 +1,8 @@
 % Choose dataset
 
-use_modified_capon_minimum_variance('Alpinion_L3-8_CPWC_hyperechoic_scatterers', 'Alpinion', 1, 'Ria');
-%use_modified_capon_minimum_variance('Alpinion_L3-8_CPWC_hypoechoic', 'Alpinion');
+%0=normal, 1=save R, 2=load Ria
+%use_modified_capon_minimum_variance('Alpinion_L3-8_CPWC_hyperechoic_scatterers', 'Alpinion', 1, 'Ria');
+use_modified_capon_minimum_variance('Alpinion_L3-8_CPWC_hypoechoic', 'Alpinion', 1, 'Ria');
 %use_modified_capon_minimum_variance('Alpinion_L3-8_FI_hyperechoic_scatterers', 'Alpinion');
 %use_modified_capon_minimum_variance('Alpinion_L3-8_FI_hypoechoic', 'Alpinion');
 

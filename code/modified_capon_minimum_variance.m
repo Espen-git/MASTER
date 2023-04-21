@@ -235,6 +235,8 @@ classdef modified_capon_minimum_variance < postprocess
                             end
                         end
                         
+                        %Steering vector
+                        a = ones(L_new,1);
                         %Create mv weights
                         w_mv = (Ria)/(a'*Ria);
                         

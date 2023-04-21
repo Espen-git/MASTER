@@ -1,8 +1,5 @@
-# network
 import torch
 import torch.nn as nn
-
-torch.manual_seed(0)
     
 class FFNeuralNetwork(nn.Module):
     def __init__(self, config):
@@ -14,6 +11,7 @@ class FFNeuralNetwork(nn.Module):
         input_scale = 1 if is_complex else 2
         numb_input_corr = 16*16 if not use_upper_triangular else 136
         numb_input_features = numb_input_corr*input_scale
+        numb_output_features = 16*input_scale
 
         self.flatten = nn.Flatten()
         self.linear_relu_stack = nn.Sequential(
@@ -21,10 +19,10 @@ class FFNeuralNetwork(nn.Module):
             nn.ReLU(),
             nn.Linear(128,128),
             nn.ReLU(),
-            nn.Linear(128,16*input_scale),
+            nn.Linear(128,numb_output_features),
         )        
     
     def forward(self, x):
-        x = self.flatten(x)
+        #x = self.flatten(x)
         logits = self.linear_relu_stack(x)
         return logits
