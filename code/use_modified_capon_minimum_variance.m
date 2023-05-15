@@ -10,12 +10,12 @@ function b_data_MV = use_modified_capon_minimum_variance(name, scan_type, call_t
     channel_data = uff.read_object([local_path, strcat(name, '.uff')],'/channel_data');
     
     % Define the scan
-    if scan_type == 'Alpinion'
+    if strcmp(scan_type, 'Alpinion') %scan_type == 'Alpinion'
         scan = uff.linear_scan();
         scan.x_axis = linspace(channel_data.probe.x(1),channel_data.probe.x(end),512).';
         scan.z_axis = linspace(1e-3,50e-3,512).';
         
-    elseif scan_type == 'Verasonics'
+    elseif strcmp(scan_type, 'Verasonics') %scan_type == 'Verasonics'
         depth_axis = linspace(0e-3,110e-3,1024).';
         azimuth_axis = zeros(channel_data.N_waves,1);
         for n = 1:channel_data.N_waves
@@ -23,7 +23,7 @@ function b_data_MV = use_modified_capon_minimum_variance(name, scan_type, call_t
         end
         scan = uff.sector_scan('azimuth_axis',azimuth_axis,'depth_axis',depth_axis);
         
-    elseif scan_type == 'PICMUS'
+    elseif strcmp(scan_type, 'PICMUS') %scan_type == 'PICMUS'
         scan = uff.linear_scan();
         scan.x_axis = linspace(channel_data.probe.x(1),channel_data.probe.x(end),512)';
         scan.z_axis = linspace(5e-3,50e-3,512)';

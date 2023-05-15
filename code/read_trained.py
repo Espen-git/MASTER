@@ -38,8 +38,8 @@ def run_forward(root_dir, model, config):
     dataset = USDataset(root_dir, config, trvaltest=2, transform=data_transform, seed=config['seed'])
     dataloader = torch.utils.data.DataLoader(dataset, batch_size=config['batchsize'], 
                                                      shuffle=False, num_workers=config['num_workers'], 
-                                                     pin_memory=config['use_pinned_memory'], prefetch_factor=config['prefetch_factor'],
-                                                       persistent_workers=config['persistent_workers'])
+                                                     pin_memory=config['use_pinned_memory'])#, prefetch_factor=config['prefetch_factor'],
+                                                       #persistent_workers=config['persistent_workers'])
 
     if config['use_gpu']:
         device = torch.device('cuda')
@@ -61,8 +61,8 @@ def run_forward(root_dir, model, config):
         file_paths = data['file_path']
 
         for i in range(batch_size):
-            Ria[i] = Ria[i] / scale[i] 
-            
+            current_Ria = Ria[i] / scale[i] 
+            Ria_dict = {'Ria': np.array(current_Ria.detach().cpu())}
             # Create path
             data_path = str(file_paths[i])
             seperator = "/"
@@ -79,13 +79,14 @@ def run_forward(root_dir, model, config):
 
             file_name = split_path[-1]
             file_path = save_dir_path + '/' + file_name
-            #Ria_dict = {'Ria': Ria[i]}
-            sio.savemat(file_path, np.array(Ria.cpu()))
+            
+            sio.savemat(file_path, Ria_dict)
+            #tmp = sio.loadmat(file_path)
 
 if __name__ == '__main__':
 
     root_dir = 'C:/Users/espen/Documents/Skole/MASTER/code/'
-    modelname = 'Test4'
+    modelname = 'Test5(Two images)'
 
     model, config = load_model_config(root_dir, modelname)
     config['images'] = ["Alpinion_L3-8_CPWC_hyperechoic_scatterers"]

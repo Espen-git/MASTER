@@ -14,4 +14,8 @@ def plot(model):
     plt.show()
 
 if __name__=='__main__':
-    plot('Test5(Two images)')
+    #plot('Test3(upper_triangular)')
+    #plot('Test4')
+    plot('Test5(Two_images)')
+    #plot('Test6(hypoechoic)')
+    #plot('Test7(4_Alpion_images)')

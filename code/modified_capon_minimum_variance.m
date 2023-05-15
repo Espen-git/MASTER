@@ -183,10 +183,11 @@ classdef modified_capon_minimum_variance < postprocess
                         L_new = floor(L_frac*M_new);
                         I_new = eye(L_new);
                         
-                        % If load Ria(R_inv)
+                        % If load Ria
                         if call_type == 2
                             file_path = strcat(image_dir,'\',Ria_type,'\');
-                            Ria = cell2mat(struct2cell(load(strcat(file_path,num2str(n_frame),'_',num2str(e),'_',num2str(k),'.mat'))));
+                            %Ria = cell2mat(struct2cell(load(strcat(file_path,num2str(n_frame),'_',num2str(e),'_',num2str(k),'.mat'))));
+                            Ria = load(strcat(file_path,num2str(n_frame),'_',num2str(e),'_',num2str(k),'.mat')).Ria.';
                         else % Calculate Ria
                             %Estimate spatial covariance matrix
                             R_sub = zeros(L_new,L_new);

@@ -102,12 +102,12 @@ def runstuff(config, root_dir):
     dataloaders = {}
     dataloaders['train'] = torch.utils.data.DataLoader(datasets['train'], batch_size=config['batchsize_train'], 
                                                        shuffle=config['shuffle'], num_workers=config['num_workers'], 
-                                                       pin_memory=config['use_pinned_memory'], prefetch_factor=config['prefetch_factor'],
-                                                       persistent_workers=config['persistent_workers'])
+                                                       pin_memory=config['use_pinned_memory'])#, prefetch_factor=config['prefetch_factor'],
+                                                       #persistent_workers=config['persistent_workers'])
     dataloaders['val'] = torch.utils.data.DataLoader(datasets['val'], batch_size=config['batchsize_val'], 
                                                      shuffle=False, num_workers=config['num_workers'], 
-                                                     pin_memory=config['use_pinned_memory'], prefetch_factor=config['prefetch_factor'],
-                                                       persistent_workers=config['persistent_workers'])
+                                                     pin_memory=config['use_pinned_memory'])#, prefetch_factor=config['prefetch_factor'],
+                                                       #persistent_workers=config['persistent_workers'])
 
     # Device
     if config['use_gpu']:
@@ -150,12 +150,27 @@ if __name__=='__main__':
     config['lr'] = 0.001
     config['scheduler_stepsize'] = 10
     config['scheduler_factor'] = 0.5
-    config['images'] = ['Alpinion_L3-8_CPWC_hyperechoic_scatterers','Alpinion_L3-8_CPWC_hypoechoic']
-    config['model_name'] = 'Test5(Two images)'
+    #config['images'] = ['Verasonics_P2-4_parasternal_long_small']
+    #config['images'] = ['Alpinion_L3-8_CPWC_hyperechoic_scatterers',
+    #                    'Alpinion_L3-8_CPWC_hypoechoic',
+    #                    'Alpinion_L3-8_FI_hyperechoic_scatterers',
+    #                    'Alpinion_L3-8_FI_hypoechoic']
+    config['images'] = ['Alpinion_L3-8_CPWC_hypoechoic']
+    #config['model_name'] = 'Test7(3_full_Alpion_images)'
+    config['model_name'] = 'Test0'
     config['is_complex'] = False
     config['use_upper_triangular'] = True
     config['use_normalized'] = True
 
     root_dir = 'C:/Users/espen/Documents/Skole/MASTER/code/'
+    #root_dir = ''
+    """
+    print(f"Is CUDA supported by this system? {torch.cuda.is_available()}")
+    print(f"CUDA version: {torch.version.cuda}")
+    # Storing ID of current CUDA device
+    cuda_id = torch.cuda.current_device()
+    print(f"ID of current CUDA device: {torch.cuda.current_device()}")     
+    print(f"Name of current CUDA device: {torch.cuda.get_device_name(cuda_id)}")
+    """
     
     runstuff(config, root_dir)
