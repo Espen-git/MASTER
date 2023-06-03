@@ -13,9 +13,21 @@ def plot(model):
     plt.legend()
     plt.show()
 
+def print_config(model):
+    data_path = 'C:/Users/espen/Documents/Skole/MASTER/code/data/models/' + model + '.npz'
+    data = np.load(data_path, allow_pickle=True)
+
+    print(data['config'])
+
+
 if __name__=='__main__':
+    #plot("Test2")
     #plot('Test3(upper_triangular)')
     #plot('Test4')
-    plot('Test5(Two_images)')
+    #plot('Test5(Two_images)')
     #plot('Test6(hypoechoic)')
-    #plot('Test7(4_Alpion_images)')
+    #plot('Test7(hyperechoic)')
+    #plot('Test8(Verasonics)')
+    #plot('Test9(Verasonics-complex_network)')
+    plot('Test10(Verasonics-complex_network2)')
+    #print_config("Test3(upper_triangular)")

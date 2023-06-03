@@ -17,7 +17,7 @@ import os
 import scipy.io as sio
 
 from dataset import USDataset
-from network import FFNeuralNetwork
+from network import FFNeuralNetwork, FFNeuralNetwork2, FFNeuralNetwork3
 
 def load_model_config(root_dir, modelname):
     model_path = root_dir + 'data/models/' + modelname + '.pt'
@@ -86,10 +86,10 @@ def run_forward(root_dir, model, config):
 if __name__ == '__main__':
 
     root_dir = 'C:/Users/espen/Documents/Skole/MASTER/code/'
-    modelname = 'Test5(Two images)'
+    modelname = 'Test10(Verasonics-complex_network2)'
 
     model, config = load_model_config(root_dir, modelname)
-    config['images'] = ["Alpinion_L3-8_CPWC_hyperechoic_scatterers"]
+    config['images'] = ['Alpinion_L3-8_CPWC_hyperechoic_scatterers']
     config['model_name'] = modelname
 
     run_forward(root_dir, model, config)

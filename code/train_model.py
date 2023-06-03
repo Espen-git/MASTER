@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import os
 
 from dataset import USDataset
-from network import FFNeuralNetwork
+from network import FFNeuralNetwork, FFNeuralNetwork2, FFNeuralNetwork3
 from plot_loss import plot
 
 def run_epoch(model, dataloader, criterion, device, optimizer, mode):
@@ -116,7 +116,9 @@ def runstuff(config, root_dir):
         device= torch.device('cpu')
 
     # Model
-    model = FFNeuralNetwork(config)
+    #model = FFNeuralNetwork(config)
+    #model = FFNeuralNetwork2(config)
+    model = FFNeuralNetwork3(config)
     model = model.to(device)
 
     lossfct = nn.MSELoss()
@@ -144,7 +146,7 @@ if __name__=='__main__':
     config['seed'] = 2023
     config['batchsize_train'] = 16
     config['batchsize_val'] = 64
-    config['max_num_epochs'] = 50
+    config['max_num_epochs'] = 100
     config['num_workers'] = 10
     config['prefetch_factor'] = 1
     config['lr'] = 0.001
@@ -155,16 +157,15 @@ if __name__=='__main__':
     #                    'Alpinion_L3-8_CPWC_hypoechoic',
     #                    'Alpinion_L3-8_FI_hyperechoic_scatterers',
     #                    'Alpinion_L3-8_FI_hypoechoic']
-    config['images'] = ['Alpinion_L3-8_CPWC_hypoechoic']
-    #config['model_name'] = 'Test7(3_full_Alpion_images)'
-    config['model_name'] = 'Test0'
+    config['images'] = ['Verasonics_P2-4_parasternal_long_small']
+    config['model_name'] = 'Test10(Verasonics-complex_network2)'
     config['is_complex'] = False
     config['use_upper_triangular'] = True
     config['use_normalized'] = True
 
     root_dir = 'C:/Users/espen/Documents/Skole/MASTER/code/'
-    #root_dir = ''
-    """
+    
+    """ 
     print(f"Is CUDA supported by this system? {torch.cuda.is_available()}")
     print(f"CUDA version: {torch.version.cuda}")
     # Storing ID of current CUDA device
