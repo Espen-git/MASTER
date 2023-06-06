@@ -48,6 +48,15 @@ b_data_ML10_Verasonics = use_modified_capon_minimum_variance('Verasonics_P2-4_pa
 save_path = strcat(image_dir, 'b_data_ML10_Verasonics.mat');
 save(save_path,'b_data_ML10_Verasonics');
 
+%% 11 Verasonics (hyperechoic)
+b_data_ML11_hyperechoic = use_modified_capon_minimum_variance('Alpinion_L3-8_CPWC_hyperechoic_scatterers', 'Alpinion', 2, 'Ria_Test11(Verasonics-complex_network_4_frames)');
+save_path = strcat(image_dir, 'b_data_ML11_hyperechoic.mat');
+save(save_path,'b_data_ML11_hyperechoic');
+%% 11 Verasonics (Verasonics)
+b_data_ML11_Verasonics = use_modified_capon_minimum_variance('Verasonics_P2-4_parasternal_long_small_1_frame', 'Verasonics', 2, 'Ria_Test11(Verasonics-complex_network_4_frames)');
+save_path = strcat(image_dir, 'b_data_ML11_Verasonics.mat');
+save(save_path,'b_data_ML11_Verasonics');
+
 
 %% MV
 b_data_MV_hyperechoic = use_modified_capon_minimum_variance('Alpinion_L3-8_CPWC_hyperechoic_scatterers', 'Alpinion', 0, 'Ria');
@@ -61,7 +70,7 @@ save_path = strcat(image_dir, 'b_data_MV_Verasonics.mat');
 save(save_path,'b_data_MV_Verasonics');
 
 
-%% DAS
+%% DAS Verasonics
 % data location
 url='http://ustb.no/datasets/';      % if not found downloaded from here
 data_path = 'C:\Users\espen\Documents\Skole\MASTER\code\data\';
@@ -85,73 +94,56 @@ mid.scan = scan;
 mid.dimension = dimension.both();
 mid.transmit_apodization.window = uff.window.none;
 mid.receive_apodization.window = uff.window.none;
-b_data_DAS = mid.go();
+b_data_DAS_Verasonics = mid.go();
 
-%% Load 
-image_dir = 'C:\Users\espen\Documents\Skole\MASTER\images\';
-b_data_ML8_hyperechoic = load(strcat(image_dir,'b_data_ML8_hyperechoic.mat')).b_data_ML8_hyperechoic;
-b_data_ML9_hyperechoic = load(strcat(image_dir,'b_data_ML9_hyperechoic.mat')).b_data_ML9_hyperechoic;
-b_data_ML10_hyperechoic = load(strcat(image_dir,'b_data_ML10_hyperechoic.mat')).b_data_ML10_hyperechoic;
+save_path = strcat(image_dir, 'b_data_DAS_Verasonics.mat');
+save(save_path,'b_data_DAS_Verasonics');
 
-
-b_data_MV_hyperechoic = load(strcat(image_dir,'b_data_MV_hyperechoic.mat')).b_data_MV_hyperechoic;
-%% Scan
-name = 'Alpinion_L3-8_CPWC_hyperechoic_scatterers';
+%% DAS Alpinion
+% First image
 url='http://ustb.no/datasets/';      % if not found downloaded from here
 data_path = 'C:\Users\espen\Documents\Skole\MASTER\code\data\';
-local_path = strcat(data_path, name, '\'); % location of example data
+local_path = strcat(data_path, 'Alpinion_L3-8_CPWC_hyperechoic_scatterers', '\'); % location of example data
 addpath(local_path);
 % check if the file is available in the local path or downloads otherwise
-tools.download(strcat(name, '.uff'), url, local_path);
-channel_data = uff.read_object([local_path, strcat(name, '.uff')],'/channel_data');
+tools.download(strcat('Alpinion_L3-8_CPWC_hyperechoic_scatterers', '.uff'), url, local_path);
+channel_data = uff.read_object([local_path, strcat('Alpinion_L3-8_CPWC_hyperechoic_scatterers', '.uff')],'/channel_data');
 
+% Scan
 scan = uff.linear_scan();
-scan.x_axis = linspace(channel_data.probe.x(1),channel_data.probe.x(end),512).';
-scan.z_axis = linspace(1e-3,50e-3,512).';
+scan.x_axis = linspace(channel_data.probe.x(1),channel_data.probe.x(end),512)';
+scan.z_axis = linspace(5e-3,50e-3,512)';
 
-%% Plots
-x = scan.x_axis*1000;
-z = scan.z_axis*1000;
-font = 10;
-pos = [1000 918 560-180 420];
+% DAS first image
+mid = midprocess.das();
+mid.channel_data = channel_data;
+mid.scan = scan;
+mid.dimension = dimension.both();
+mid.transmit_apodization.window = uff.window.none;
+mid.receive_apodization.window = uff.window.none;
+b_data_DAS_Alpinion_hyperechoic = mid.go();
 
-%ML_4 = reshape(b_data_ML4.data, [512,512]);
-%ML_5 = reshape(b_data_ML5.data, [512,512]);
-%ML_6 = reshape(b_data_ML6.data, [512,512]);
-%ML_7 = reshape(b_data_ML7.data, [512,512]);
-ML_8_hyper = reshape(b_data_ML8_hyperechoic.data, [512,512]);
-%ML_8_verasonics = reshape(b_data_ML8_Verasonics.data, [101,1024]);
-ML_9_hyper = reshape(b_data_ML9_hyperechoic.data, [512,512]);
-%ML_9_verasonics = reshape(b_data_ML9_Verasonics.data, [101,1024]);
-ML_10_hyper = reshape(b_data_ML10_hyperechoic.data, [512,512]);
-%ML_10_verasonics = reshape(b_data_ML10_Verasonics.data, [101,1024]);
-MV_hyper = reshape(b_data_MV_hyperechoic.data, [512,512]);
-%MV_hypo = reshape(b_data_MV_hypoechoic.data, [512,512]);
-%MV_verasonics = reshape(b_data_MV_Verasonics.data, [101,1024]);
+save_path = strcat(image_dir, 'b_data_DAS_Alpinion_hyperechoic.mat');
+save(save_path,'b_data_DAS_Alpinion_hyperechoic');
 
-scale = max(MV_hyper(:));
+% Second image
+url='http://ustb.no/datasets/';      % if not found downloaded from here
+data_path = 'C:\Users\espen\Documents\Skole\MASTER\code\data\';
+local_path = strcat(data_path, 'Alpinion_L3-8_CPWC_hypoechoic', '\'); % location of example data
+addpath(local_path);
+% check if the file is available in the local path or downloads otherwise
+tools.download(strcat('Alpinion_L3-8_CPWC_hypoechoic', '.uff'), url, local_path);
+channel_data = uff.read_object([local_path, strcat('Alpinion_L3-8_CPWC_hypoechoic', '.uff')],'/channel_data');
 
-%plot_US_image(ML_4, x, z, scale, font, pos, 'ML\_4');
-%plot_US_image(ML_5, x, z, scale, font, pos, 'ML\_5');
-%plot_US_image(ML_6, x, z, scale, font, pos, 'ML\_6');
-%plot_US_image(ML_7, x, z, scale, font, pos, 'ML\_7');
-plot_US_image(ML_8_hyper, x, z, scale, font, pos, 'ML\_8\_hyper');
-plot_US_image(ML_9_hyper, x, z, scale, font, pos, 'ML\_9\_hyper');
-plot_US_image(ML_10_hyper, x, z, scale, font, pos, 'ML\_10\_hyper');
-%plot_US_image(MV_hyper, x, z, scale, font, pos, 'MV\_hyper');
-%plot_US_image(MV_hypo, x, z, scale, font, pos, 'MV\_hypo');
-%b_data_ML9_Verasonics.plot();
+% DAS second image
+mid = midprocess.das();
+mid.channel_data = channel_data;
+mid.scan = scan;
+mid.dimension = dimension.both();
+mid.transmit_apodization.window = uff.window.none;
+mid.receive_apodization.window = uff.window.none;
+b_data_DAS_Alpinion_hypoechoic = mid.go();
 
-
-function plot_US_image(b_data, x, z, scale, font, pos, name)
-    figure()
-    imagesc(x, z, db(abs(b_data./scale)));
-    colormap gray; caxis([-60 0]); colorbar;
-    title(name);
-    set(gca,'fontsize',font);
-    set(gcf, 'position',pos);
-end
-
-
-
+save_path = strcat(image_dir, 'b_data_DAS_Alpinion_hypoechoic.mat');
+save(save_path,'b_data_DAS_Alpinion_hypoechoic');
 

@@ -117,8 +117,8 @@ def runstuff(config, root_dir):
 
     # Model
     #model = FFNeuralNetwork(config)
-    #model = FFNeuralNetwork2(config)
-    model = FFNeuralNetwork3(config)
+    model = FFNeuralNetwork2(config)
+    #model = FFNeuralNetwork3(config)
     model = model.to(device)
 
     lossfct = nn.MSELoss()
@@ -157,8 +157,8 @@ if __name__=='__main__':
     #                    'Alpinion_L3-8_CPWC_hypoechoic',
     #                    'Alpinion_L3-8_FI_hyperechoic_scatterers',
     #                    'Alpinion_L3-8_FI_hypoechoic']
-    config['images'] = ['Verasonics_P2-4_parasternal_long_small']
-    config['model_name'] = 'Test10(Verasonics-complex_network2)'
+    config['images'] = ['Verasonics_P2-4_parasternal_long_small_4_frames']
+    config['model_name'] = 'Test11(Verasonics-complex_network_4_frames)'
     config['is_complex'] = False
     config['use_upper_triangular'] = True
     config['use_normalized'] = True

@@ -29,5 +29,6 @@ if __name__=='__main__':
     #plot('Test7(hyperechoic)')
     #plot('Test8(Verasonics)')
     #plot('Test9(Verasonics-complex_network)')
-    plot('Test10(Verasonics-complex_network2)')
+    #plot('Test10(Verasonics-complex_network2)')
+    plot('Test11(Verasonics-complex_network_4_frames)')
     #print_config("Test3(upper_triangular)")
