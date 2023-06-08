@@ -125,7 +125,7 @@ b_data_DAS_Alpinion_hyperechoic = mid.go();
 
 save_path = strcat(image_dir, 'b_data_DAS_Alpinion_hyperechoic.mat');
 save(save_path,'b_data_DAS_Alpinion_hyperechoic');
-
+%%
 % Second image
 url='http://ustb.no/datasets/';      % if not found downloaded from here
 data_path = 'C:\Users\espen\Documents\Skole\MASTER\code\data\';
