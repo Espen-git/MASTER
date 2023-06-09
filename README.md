@@ -1,2 +1,2 @@
 # MASTER
-Master oppgave og materialer
+Master thesis and code
