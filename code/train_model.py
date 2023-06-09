@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 import os
 
 from dataset import USDataset
-from network import FFNeuralNetwork, FFNeuralNetwork2, FFNeuralNetwork3
+from network import FFNeuralNetwork, FFNeuralNetwork2, FFNeuralNetwork3, FFNeuralNetwork_small
 from plot_loss import plot
 
 def run_epoch(model, dataloader, criterion, device, optimizer, mode):
@@ -117,8 +117,10 @@ def runstuff(config, root_dir):
 
     # Model
     #model = FFNeuralNetwork(config)
-    model = FFNeuralNetwork2(config)
+    #model = FFNeuralNetwork2(config)
     #model = FFNeuralNetwork3(config)
+    model = FFNeuralNetwork_small(config)
+
     model = model.to(device)
 
     lossfct = nn.MSELoss()
@@ -158,7 +160,7 @@ if __name__=='__main__':
     #                    'Alpinion_L3-8_FI_hyperechoic_scatterers',
     #                    'Alpinion_L3-8_FI_hypoechoic']
     config['images'] = ['Verasonics_P2-4_parasternal_long_small_4_frames']
-    config['model_name'] = 'Test11(Verasonics-complex_network_4_frames)'
+    config['model_name'] = 'Test12(Verasonics-small_network_4_frames)'
     config['is_complex'] = False
     config['use_upper_triangular'] = True
     config['use_normalized'] = True
