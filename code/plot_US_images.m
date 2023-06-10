@@ -50,7 +50,7 @@ diff = false;
 %plot_alpinion_image(b_data_ML9_hyperechoic, scale, 'ML_9_hyperechoic', dynamic_range_alpinion, diff);
 %plot_alpinion_image(b_data_ML10_hyperechoic, scale, 'ML_10_hyperechoic', dynamic_range_alpinion, diff);
 %plot_alpinion_image(b_data_ML11_hyperechoic, scale, 'ML_11_hyperechoic', dynamic_range_alpinion, diff);
-plot_alpinion_image(b_data_ML12_hyperechoic, scale, 'ML_12_hyperechoic', dynamic_range_alpinion, diff);
+%plot_alpinion_image(b_data_ML12_hyperechoic, scale, 'ML_12_hyperechoic', dynamic_range_alpinion, diff);
 %plot_alpinion_image(b_data_MV_hyperechoic, scale, 'MV_hyperechoic', dynamic_range_alpinion, diff);
 %plot_alpinion_image(b_data_MV_hypoechoic, scale, 'MV_hypoechoic', dynamic_range_alpinion, diff);
 %plot_alpinion_image(b_data_DAS_Alpinion_hyperechoic, scale, 'DAS_hyperechoic', dynamic_range_alpinion, diff);
@@ -58,16 +58,16 @@ plot_alpinion_image(b_data_ML12_hyperechoic, scale, 'ML_12_hyperechoic', dynamic
 
 % diff images
 
-plot_alpinion_image(b_data_ML4, scale, 'diff_ML_4', dynamic_range_alpinion, b_data_MV_hyperechoic);
-plot_alpinion_image(b_data_ML5, scale, 'diff_ML_5', dynamic_range_alpinion, b_data_MV_hyperechoic);
-plot_alpinion_image(b_data_ML6, scale, 'diff_ML_6', dynamic_range_alpinion, b_data_MV_hyperechoic);
-plot_alpinion_image(b_data_ML8_hyperechoic, scale, 'diff_ML_8_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
-plot_alpinion_image(b_data_ML9_hyperechoic, scale, 'diff_ML_9_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
-plot_alpinion_image(b_data_ML10_hyperechoic, scale, 'diff_ML_10_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
-plot_alpinion_image(b_data_ML11_hyperechoic, scale, 'diff_ML_11_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
-plot_alpinion_image(b_data_ML12_hyperechoic, scale, 'diff_ML_12_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
+%plot_alpinion_image(b_data_ML4, scale, 'diff_ML_4', dynamic_range_alpinion, b_data_MV_hyperechoic);
+%plot_alpinion_image(b_data_ML5, scale, 'diff_ML_5', dynamic_range_alpinion, b_data_MV_hyperechoic);
+%plot_alpinion_image(b_data_ML6, scale, 'diff_ML_6', dynamic_range_alpinion, b_data_MV_hyperechoic);
+%plot_alpinion_image(b_data_ML8_hyperechoic, scale, 'diff_ML_8_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
+%plot_alpinion_image(b_data_ML9_hyperechoic, scale, 'diff_ML_9_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
+%plot_alpinion_image(b_data_ML10_hyperechoic, scale, 'diff_ML_10_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
+%plot_alpinion_image(b_data_ML11_hyperechoic, scale, 'diff_ML_11_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
+%plot_alpinion_image(b_data_ML12_hyperechoic, scale, 'diff_ML_12_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
 
-plot_alpinion_image(b_data_ML7, max(b_data_MV_hypoechoic.data(:)), 'diff_ML_7', dynamic_range_alpinion, b_data_MV_hypoechoic);
+%plot_alpinion_image(b_data_ML7, max(b_data_MV_hypoechoic.data(:)), 'diff_ML_7', dynamic_range_alpinion, b_data_MV_hypoechoic);
 
 %% Verasonics Plots
 dynamic_range_verasonics = [-70 0];
@@ -80,16 +80,16 @@ diff = false;
 %plot_verasonics_image(b_data_ML9_Verasonics, scale, 'ML_9_Verasonics', dynamic_range_verasonics, extract_frame, diff);
 %plot_verasonics_image(b_data_ML10_Verasonics, scale, 'ML_10_Verasonics', dynamic_range_verasonics, extract_frame, diff);
 %plot_verasonics_image(b_data_ML11_Verasonics, scale, 'ML_11_Verasonics', dynamic_range_verasonics, false, diff);
-plot_verasonics_image(b_data_ML12_Verasonics, scale, 'ML_12_Verasonics', dynamic_range_verasonics, false, diff);
+%plot_verasonics_image(b_data_ML12_Verasonics, scale, 'ML_12_Verasonics', dynamic_range_verasonics, false, diff);
 %plot_verasonics_image(b_data_MV_Verasonics, scale, 'MV_Verasonics', dynamic_range_verasonics, extract_frame, diff);
 %plot_verasonics_image(b_data_DAS_Verasonics, scale, 'DAS_Verasonics', dynamic_range_verasonics, extract_frame, diff);
 
 % diff images
 
-plot_verasonics_image(b_data_ML8_Verasonics, scale, 'diff_ML_8_Verasonics', dynamic_range_verasonics, extract_frame, b_data_MV_Verasonics);
-plot_verasonics_image(b_data_ML9_Verasonics, scale, 'diff_ML_9_Verasonics', dynamic_range_verasonics, extract_frame, b_data_MV_Verasonics);
-plot_verasonics_image(b_data_ML10_Verasonics, scale, 'diff_ML_10_Verasonics', dynamic_range_verasonics, extract_frame, b_data_MV_Verasonics);
-plot_verasonics_image(b_data_ML11_Verasonics, scale, 'diff_ML_11_Verasonics', dynamic_range_verasonics, false, b_data_MV_Verasonics);
+%plot_verasonics_image(b_data_ML8_Verasonics, scale, 'diff_ML_8_Verasonics', dynamic_range_verasonics, extract_frame, b_data_MV_Verasonics);
+%plot_verasonics_image(b_data_ML9_Verasonics, scale, 'diff_ML_9_Verasonics', dynamic_range_verasonics, extract_frame, b_data_MV_Verasonics);
+%plot_verasonics_image(b_data_ML10_Verasonics, scale, 'diff_ML_10_Verasonics', dynamic_range_verasonics, extract_frame, b_data_MV_Verasonics);
+%plot_verasonics_image(b_data_ML11_Verasonics, scale, 'diff_ML_11_Verasonics', dynamic_range_verasonics, false, b_data_MV_Verasonics);
 plot_verasonics_image(b_data_ML12_Verasonics, scale, 'diff_ML_12_Verasonics', dynamic_range_verasonics, false, b_data_MV_Verasonics);
 
 %% Appodizaation example plots 
