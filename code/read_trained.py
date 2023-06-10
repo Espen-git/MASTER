@@ -86,10 +86,10 @@ def run_forward(root_dir, model, config):
 if __name__ == '__main__':
 
     root_dir = 'C:/Users/espen/Documents/Skole/MASTER/code/'
-    modelname = 'Test11(Verasonics-complex_network_4_frames)'
+    modelname = 'Test12(Verasonics-small_network_4_frames)'
 
     model, config = load_model_config(root_dir, modelname)
-    config['images'] = ['Alpinion_L3-8_CPWC_hyperechoic_scatterers']
+    config['images'] = ['Verasonics_P2-4_parasternal_long_small_1_frame']
     config['model_name'] = modelname
 
     run_forward(root_dir, model, config)

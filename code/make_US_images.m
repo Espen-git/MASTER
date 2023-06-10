@@ -57,6 +57,14 @@ b_data_ML11_Verasonics = use_modified_capon_minimum_variance('Verasonics_P2-4_pa
 save_path = strcat(image_dir, 'b_data_ML11_Verasonics.mat');
 save(save_path,'b_data_ML11_Verasonics');
 
+%% 12 Verasonics (hyperechoic)
+b_data_ML12_hyperechoic = use_modified_capon_minimum_variance('Alpinion_L3-8_CPWC_hyperechoic_scatterers', 'Alpinion', 2, 'Ria_Test12(Verasonics-small_network_4_frames)');
+save_path = strcat(image_dir, 'b_data_ML12_hyperechoic.mat');
+save(save_path,'b_data_ML12_hyperechoic');
+%% 12 Verasonics (Verasonics)
+b_data_ML12_Verasonics = use_modified_capon_minimum_variance('Verasonics_P2-4_parasternal_long_small_1_frame', 'Verasonics', 2, 'Ria_Test12(Verasonics-small_network_4_frames)');
+save_path = strcat(image_dir, 'b_data_ML12_Verasonics.mat');
+save(save_path,'b_data_ML12_Verasonics');
 
 %% MV
 b_data_MV_hyperechoic = use_modified_capon_minimum_variance('Alpinion_L3-8_CPWC_hyperechoic_scatterers', 'Alpinion', 0, 'Ria');

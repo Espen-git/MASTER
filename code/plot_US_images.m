@@ -3,6 +3,7 @@ clear all;
 close all;
 
 image_dir = 'C:\Users\espen\Documents\Skole\MASTER\images\';
+%crameri
 
 % ML images
 b_data_ML4 = load(strcat(image_dir,'b_data_ML4.mat')).b_data_ML4;
@@ -21,6 +22,9 @@ b_data_ML10_Verasonics = load(strcat(image_dir,'b_data_ML10_Verasonics.mat')).b_
 
 b_data_ML11_hyperechoic = load(strcat(image_dir,'b_data_ML11_hyperechoic.mat')).b_data_ML11_hyperechoic;
 b_data_ML11_Verasonics = load(strcat(image_dir,'b_data_ML11_Verasonics.mat')).b_data_ML11_Verasonics;
+
+b_data_ML12_hyperechoic = load(strcat(image_dir,'b_data_ML12_hyperechoic.mat')).b_data_ML12_hyperechoic;
+b_data_ML12_Verasonics = load(strcat(image_dir,'b_data_ML12_Verasonics.mat')).b_data_ML12_Verasonics;
 
 % MV images
 b_data_MV_hyperechoic = load(strcat(image_dir,'b_data_MV_hyperechoic.mat')).b_data_MV_hyperechoic;
@@ -46,6 +50,7 @@ diff = false;
 %plot_alpinion_image(b_data_ML9_hyperechoic, scale, 'ML_9_hyperechoic', dynamic_range_alpinion, diff);
 %plot_alpinion_image(b_data_ML10_hyperechoic, scale, 'ML_10_hyperechoic', dynamic_range_alpinion, diff);
 %plot_alpinion_image(b_data_ML11_hyperechoic, scale, 'ML_11_hyperechoic', dynamic_range_alpinion, diff);
+plot_alpinion_image(b_data_ML12_hyperechoic, scale, 'ML_12_hyperechoic', dynamic_range_alpinion, diff);
 %plot_alpinion_image(b_data_MV_hyperechoic, scale, 'MV_hyperechoic', dynamic_range_alpinion, diff);
 %plot_alpinion_image(b_data_MV_hypoechoic, scale, 'MV_hypoechoic', dynamic_range_alpinion, diff);
 %plot_alpinion_image(b_data_DAS_Alpinion_hyperechoic, scale, 'DAS_hyperechoic', dynamic_range_alpinion, diff);
@@ -60,8 +65,9 @@ plot_alpinion_image(b_data_ML8_hyperechoic, scale, 'diff_ML_8_hyperechoic', dyna
 plot_alpinion_image(b_data_ML9_hyperechoic, scale, 'diff_ML_9_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
 plot_alpinion_image(b_data_ML10_hyperechoic, scale, 'diff_ML_10_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
 plot_alpinion_image(b_data_ML11_hyperechoic, scale, 'diff_ML_11_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
+plot_alpinion_image(b_data_ML12_hyperechoic, scale, 'diff_ML_12_hyperechoic', dynamic_range_alpinion, b_data_MV_hyperechoic);
 
-plot_alpinion_image(b_data_ML7, scale, 'diff_ML_7', dynamic_range_alpinion, b_data_MV_hypoechoic);
+plot_alpinion_image(b_data_ML7, max(b_data_MV_hypoechoic.data(:)), 'diff_ML_7', dynamic_range_alpinion, b_data_MV_hypoechoic);
 
 %% Verasonics Plots
 dynamic_range_verasonics = [-70 0];
@@ -74,17 +80,19 @@ diff = false;
 %plot_verasonics_image(b_data_ML9_Verasonics, scale, 'ML_9_Verasonics', dynamic_range_verasonics, extract_frame, diff);
 %plot_verasonics_image(b_data_ML10_Verasonics, scale, 'ML_10_Verasonics', dynamic_range_verasonics, extract_frame, diff);
 %plot_verasonics_image(b_data_ML11_Verasonics, scale, 'ML_11_Verasonics', dynamic_range_verasonics, false, diff);
+plot_verasonics_image(b_data_ML12_Verasonics, scale, 'ML_12_Verasonics', dynamic_range_verasonics, false, diff);
 %plot_verasonics_image(b_data_MV_Verasonics, scale, 'MV_Verasonics', dynamic_range_verasonics, extract_frame, diff);
 %plot_verasonics_image(b_data_DAS_Verasonics, scale, 'DAS_Verasonics', dynamic_range_verasonics, extract_frame, diff);
 
 % diff images
-%dynamic_range_verasonics = [-70 0];
+
 plot_verasonics_image(b_data_ML8_Verasonics, scale, 'diff_ML_8_Verasonics', dynamic_range_verasonics, extract_frame, b_data_MV_Verasonics);
 plot_verasonics_image(b_data_ML9_Verasonics, scale, 'diff_ML_9_Verasonics', dynamic_range_verasonics, extract_frame, b_data_MV_Verasonics);
 plot_verasonics_image(b_data_ML10_Verasonics, scale, 'diff_ML_10_Verasonics', dynamic_range_verasonics, extract_frame, b_data_MV_Verasonics);
 plot_verasonics_image(b_data_ML11_Verasonics, scale, 'diff_ML_11_Verasonics', dynamic_range_verasonics, false, b_data_MV_Verasonics);
+plot_verasonics_image(b_data_ML12_Verasonics, scale, 'diff_ML_12_Verasonics', dynamic_range_verasonics, false, b_data_MV_Verasonics);
 
-%% Appodizaation plots 
+%% Appodizaation example plots 
 L = 64;
 ham = hamming(L);
 han = hann(L);
@@ -108,25 +116,33 @@ function plot_alpinion_image(b_data, scale, name, dynamic_range, diff)
     font = 15;
     pos = [1000 918 560-180 420];
     
-    img = reshape(b_data.data, [512,512]);
+    image = reshape(b_data.data, [512,512]);
     x = b_data.scan.x_axis*1000;
     z = b_data.scan.z_axis*1000;
     
+    image = db(abs(image./scale));
+    
     if diff == false
-        % Do nothing
+        % do nothing
     else
         other_img = reshape(diff.data, [512,512]);
-        img = img - other_img;
+        image = image - (db(abs(other_img./(max(other_img(:))))));
+        abs_diff_image = abs(image);
+        maximum = max(abs_diff_image(:));
+        dynamic_range = [-maximum maximum];
     end
     
     figure;
-    imagesc(x, z, db(abs(img./scale)));
+    imagesc(x, z, image);
     ylabel(['z [mm]']); xlabel('x [mm]');
-    colormap gray;
-    caxis(dynamic_range);
     hcb = colorbar;
     hcb.Title.String = 'dB';
-    %title(name);
+    if diff == false 
+        colormap gray;
+    else
+        crameri berlin;
+    end
+    caxis(dynamic_range);
     set(gca,'fontsize',font);
     set(gcf, 'position',pos);
     saveas(gcf, strcat('images\', name, '.svg'))
@@ -148,22 +164,29 @@ function plot_verasonics_image(b_data, scale, name, dynamic_range, extract_frame
     z_matrix=reshape(scan.z,[scan.N_depth_axis scan.N_azimuth_axis]);
     z = -z_matrix*1e3;
     
-    image = abs(reshape(data,scan.N_depth_axis,scan.N_azimuth_axis)./scale);
+    image = db(abs(reshape(data,scan.N_depth_axis,scan.N_azimuth_axis)./scale));
     
     if diff == false
         % Do nothing
     else
         other_data = diff.data(:,:,:,1); % Get first image
-        other_img = abs(reshape(other_data,scan.N_depth_axis,scan.N_azimuth_axis)./scale);
-        size(other_img)
-        image = image - other_img;
+        other_img = reshape(other_data,scan.N_depth_axis,scan.N_azimuth_axis);  
+        image = image - db(abs(other_img./(max(other_img(:)))));
+        
+        abs_diff_image = abs(image);
+        maximum = max(abs_diff_image(:));
+        dynamic_range = [-maximum maximum];
     end
 
     figure;
-    pcolor(x,z,db(image));
+    pcolor(x,z,image);
     shading(gca,'flat');
     ylabel(['z [mm]']); xlabel('x [mm]');
-    colormap gray; 
+    if diff == false 
+        colormap gray;
+    else
+        crameri berlin;
+    end
     caxis(gca, dynamic_range); 
     hcb = colorbar;
     hcb.Title.String = 'dB';
